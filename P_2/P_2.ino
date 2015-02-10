@@ -1,19 +1,9 @@
 #include <Prescaler.h>
 
-const char deviceNumber = 4;
-long randNumber;
-char Init_command=0;
 char Flag =  0;
-char Count = 0;
-char sendFlag = 0;
 int P_Time = 0;
 unsigned long Time;
 unsigned long StartTime;
-unsigned char KeyNo = 2;
-unsigned char RecNo = 0;
-unsigned char MyDeviceNo = 2;   // 自局の識別デバイス番号
-unsigned long timestamp = 0;
-unsigned long count = 0;
 /*******************************************************************************
  *  電源起動時とリセットの時だけのみ処理される関数(初期化と設定処理)            *
  *******************************************************************************/
@@ -39,22 +29,19 @@ void loop(){
       while(digitalRead(8) == LOW);
       Time = micros() - Time;
       if(Time > 3000 && Time <= 5000 ){
-        Count = 1;
-      }
-      if(Count ==1){
         digitalWrite(13,HIGH);
         P_Time = (micros() - StartTime)/1000000;
         Serial.print("B\t");
         Serial.println(P_Time);
         delay(50);
       }
-      Count = 0;
     }
     else if(digitalRead(8) == HIGH){
       Time = micros() - Time;
       if(Time > 1000000 ){
         digitalWrite(13,LOW);
       }
+    }
   }
 }
 
