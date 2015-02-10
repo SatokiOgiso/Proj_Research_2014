@@ -1,11 +1,6 @@
-//#include <skInfraredCOM.h>
 #include <Prescaler.h>
-//#include "pt.h"
-
-//static struct pt pt1, pt2, pt3;
 
 const char deviceNumber = 4;
-//skInfraredCOM Infrared(2,8) ; 
 long randNumber;
 char Init_command=0;
 char Flag =  0;
@@ -51,9 +46,6 @@ void loop(){
         }
         Count = 1;
       }
-//      else if(Time <= 3000 || Time > 5000){
-//        digitalWrite(13,LOW);
-//      }
       if(Count ==1){
         digitalWrite(13,HIGH);
         P_Time = (micros() - StartTime)/1000000;
@@ -62,7 +54,6 @@ void loop(){
         LedTime = micros();
         delay(50);
       }
-//      digitalWrite(13,LOW);
       Count = 0;
     }
     else if(digitalRead(8) == HIGH){
@@ -72,30 +63,6 @@ void loop(){
         LedCount = 0;
       }
     }
-//    
-//    
-//    
-//    
-//    else if(digitalRead(8) == HIGH){
-//      Time = micros();
-//      while(digitalRead(8) == HIGH);
-//      Time = micros() - Time;
-//      if(Time > 3000 && Time <= 5000){
-//        Count = 1;
-//      }
-//      else if(Time <= 3000 || Time > 5000){
-//        digitalWrite(13,LOW);
-//      }
-//      if(Count ==1){
-//        digitalWrite(13,HIGH);
-//        P_Time = (micros() - StartTime)/1000000;
-//        Serial.print("B\t");
-//        Serial.println(P_Time);
-//        delay(500);
-//      }
-//      digitalWrite(13,LOW);
-//      Count = 0;
-//    }
   }
 }
 
