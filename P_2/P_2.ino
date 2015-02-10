@@ -12,10 +12,11 @@ void setup()
   pinMode(13,OUTPUT);
   pinMode(8,INPUT);
   digitalWrite(13,LOW);
-  while(Serial.read() != 'A');
+//  while(Serial.read() != 'A');
   Serial.println("START.");
   StartTime = micros();
 }
+
 /*******************************************************************************
  *  繰り返し実行される処理の関数(メインの処理)                                  *
  *******************************************************************************/
