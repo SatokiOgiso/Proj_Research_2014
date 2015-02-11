@@ -6,7 +6,7 @@ unsigned long StartTime;
 
 unsigned int led_value = 0;
 
-int LED = 9
+int LED = 13;
 
 
 /*******************************************************************************
@@ -15,18 +15,16 @@ int LED = 9
 void setup()
 {
   Serial.begin(9600) ;	// ArduinoIDEと通信する為の初期化処理
-  pinMode(13,OUTPUT);
+  pinMode(LED,OUTPUT);
   pinMode(8,INPUT);
-  pinMode(LED, OUTPUT);
-  digitalWrite(13,LOW);
-  analogWrite(LED, 0);
+  digitalWrite(LED,LOW);
 //  while(Serial.read() != 'A');
   Serial.println("START.");
   StartTime = micros();
 }
 
 
-unsigned int led_update(unsigned int led_value, int prescale_value, int stepsize)
+unsigned int led_update(unsigned int led_value, unsigned int prescale_value, int stepsize)
 {
   unsigned long Now;
   static unsigned long LastUpdateTime = 0;
@@ -38,7 +36,7 @@ unsigned int led_update(unsigned int led_value, int prescale_value, int stepsize
     LastUpdateTime = Now;
   }
   
-  return led_value
+  return led_value;
 }
 
 unsigned int led_validate(unsigned int led_value)
@@ -53,7 +51,7 @@ unsigned int led_validate(unsigned int led_value)
   if(led_value > 255)  led_value = 255;
   if(led_value < 0)    led_value = 0;
   
-  return led_value
+  return led_value;
 }
 
 
@@ -61,16 +59,12 @@ unsigned int led_validate(unsigned int led_value)
  *  繰り返し実行される処理の関数(メインの処理)                                  *
  *******************************************************************************/
 void loop(){
-  
-  led_value = led_update(led_value, 100000, 1);
-  analogWrite(LED, led_validate(led_value));
-  
   if(digitalRead(8) == LOW){
     Time = micros();
     while(digitalRead(8) == LOW);
     Time = micros() - Time;
     if(Time > 3000 && Time <= 5000 ){
-      digitalWrite(13,HIGH);
+      digitalWrite(LED,HIGH);
       P_Time = (micros() - StartTime)/1000000;
       Serial.print("B\t");
       Serial.println(P_Time);
@@ -80,7 +74,7 @@ void loop(){
   else if(digitalRead(8) == HIGH){
     Time = micros() - Time;
     if(Time > 1000000 ){
-      digitalWrite(13,LOW);
+      digitalWrite(LED,LOW);
     }
   }
 }
