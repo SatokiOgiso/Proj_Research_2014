@@ -4,13 +4,16 @@ volatile int ledval = 0;
 volatile int nonCount = 0;
 volatile int recvFlag = 0;
 
-int nonCountThresh = 5; //
+int nonCountThresh = 1; //
+int flashCount = 0;
+int flashCountThresh = 25;
+int flashFlag = 0;
 int led = 9;
 
 void setup()
 {
   pinMode(13, OUTPUT);
-  MsTimer2::set(10, updateLED); // 500ms period
+  MsTimer2::set(10, updateLED); // 10ms period
   MsTimer2::start();
   Serial.begin(9600);
 }
@@ -29,7 +32,21 @@ void updateLED() // This is the callback function of timer 2 interrupt
  }
  
  ledval = validateLED(ledval);
- analogWrite(led, ledval);
+ if(ledval == 0){
+   flashCount ++;
+   if(flashCount > flashCountThresh){
+     flashCount = 0;
+     if(flashFlag == 1){
+       analogWrite(led, 255); 
+       flashFlag = 0;
+     }else{
+       analogWrite(led, 0); 
+       flashFlag = 1;
+     }
+   }
+ }else{
+   analogWrite(led, ledval);
+ }
 }
 
 int validateLED(int ledval)
