@@ -10,6 +10,9 @@ please use this for receiver.
 
 ##LED_timerone_snippet 
 
-LED function tests
+LED dimming function tests.
 
 
+##LED_test
+
+Board function test for LEDs.
