@@ -4,8 +4,6 @@ int P_Time = 0;
 unsigned long Time;
 unsigned long StartTime;
 
-unsigned int led_value = 0;
-
 int LED = 13;
 
 
@@ -18,42 +16,9 @@ void setup()
   pinMode(LED,OUTPUT);
   pinMode(8,INPUT);
   digitalWrite(LED,LOW);
-//  while(Serial.read() != 'A');
   Serial.println("START.");
   StartTime = micros();
 }
-
-
-unsigned int led_update(unsigned int led_value, unsigned int prescale_value, int stepsize)
-{
-  unsigned long Now;
-  static unsigned long LastUpdateTime = 0;
-  
-  Now = micros();
-  
-  if((Now - LastUpdateTime) > prescale_value){
-    led_value = led_value + stepsize;
-    LastUpdateTime = Now;
-  }
-  
-  return led_value;
-}
-
-unsigned int led_validate(unsigned int led_value)
-{
-  unsigned long Now;
-  static unsigned long LastLEDChange = 0;
-  
-  Now = micros();
-  
-  
-  
-  if(led_value > 255)  led_value = 255;
-  if(led_value < 0)    led_value = 0;
-  
-  return led_value;
-}
-
 
 /*******************************************************************************
  *  繰り返し実行される処理の関数(メインの処理)                                  *
