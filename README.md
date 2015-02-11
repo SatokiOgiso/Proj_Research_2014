@@ -24,7 +24,7 @@ This is the GUI of system
 
 please run with following environment
 
-*python 2.7.8
-*numpy 1.9.1
-*pyserial 2.7
-*matplotlib 
+* python 2.7.8
+* numpy 1.9.1
+* pyserial 2.7
+* matplotlib 
