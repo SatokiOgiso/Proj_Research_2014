@@ -11,11 +11,17 @@ void setup()
   Serial.begin(9600);
 }
 
-void updateLED()
+void updateLED() // This is the callback function of timer 2 interrupt
 {
- analogWrite(led, ledval++);
+ ledval = validateLED(++ledval);
+ analogWrite(led, ledval);
+}
+
+int validateLED(int ledval)
+{
  if(ledval > 255 ) ledval = 255;
- if(ledval < 0) ledval = 0;
+ if(ledval < 0) ledval = 0; 
+ return ledval;
 }
 
 void loop()
@@ -25,4 +31,5 @@ void loop()
   ledval_copy = ledval;
   interrupts();
   Serial.println(ledval_copy);
+  delay(10);
 }
